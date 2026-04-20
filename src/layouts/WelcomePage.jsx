@@ -32,11 +32,18 @@ const WelcomePage = () => {
 
   const games = [
     {
-      title: "🔧 NandGame (Hardware)",
-      description: "Construye circuitos lógicos desde cero, comenzando con compuertas NAND hasta diseñar una computadora completa.",
-      skills: ["Lógica digital", "Circuitos integrados", "Arquitectura de computadoras"],
-      path: "/NandGame"
+      title: "1. 📊 Análisis (Datos)",
+      description: "Analiza y visualiza datos de sistemas telemáticos para tomar decisiones informadas.",
+      skills: ["Análisis de datos", "Visualización", "Gestión de información"],
+      path: "/Datos"
     },
+    {
+      title: "💻 Código (Software)",
+      description: "Desarrolla habilidades de programación resolviendo desafíos de código y CSS interactivos.",
+      skills: ["Programación", "Diseño web", "Algoritmos"],
+      path: "/Software"
+    },
+    
     {
       title: "🌐 Consola (Redes)",
       description: "Domina los protocolos de red y aprende a configurar dispositivos en un entorno de simulación realista.",
@@ -50,16 +57,10 @@ const WelcomePage = () => {
       path: "/Espectro"
     },
     {
-      title: "💻 Código (Software)",
-      description: "Desarrolla habilidades de programación resolviendo desafíos de código y CSS interactivos.",
-      skills: ["Programación", "Diseño web", "Algoritmos"],
-      path: "/Software"
-    },
-    {
-      title: "📊 Análisis (Datos)",
-      description: "Analiza y visualiza datos de sistemas telemáticos para tomar decisiones informadas.",
-      skills: ["Análisis de datos", "Visualización", "Gestión de información"],
-      path: "/Datos"
+      title: "🔧 NandGame (Hardware)",
+      description: "Construye circuitos lógicos desde cero, comenzando con compuertas NAND hasta diseñar una computadora completa.",
+      skills: ["Lógica digital", "Circuitos integrados", "Arquitectura de computadoras"],
+      path: "/NandGame"
     }
   ];
 
