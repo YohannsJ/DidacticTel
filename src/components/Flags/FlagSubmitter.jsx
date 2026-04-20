@@ -85,7 +85,7 @@ const FlagSubmitter = () => {
         onClick={() => setIsOpen(true)}
         title="Enviar Flag"
       >
-        🏁
+        🚩
       </button>
 
       {/* Modal */}
