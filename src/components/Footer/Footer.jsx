@@ -39,7 +39,8 @@ const Footer = () => {
     <footer className={styles.footer}>
   <div className={styles.footerContainer}>
     <div className={styles.left}>
-      <p>© {new Date().getFullYear()} Didactic-Tel · Ingeniería Civil Telemática</p>
+      <p>© {new Date().getFullYear()} Didactic-Tel · <a href="https://telematica.usm.cl/" target="_blank" rel="noopener noreferrer">Ingeniería Civil Telemática</a></p>
+    
     </div>
 
     <div className={styles.center}>
