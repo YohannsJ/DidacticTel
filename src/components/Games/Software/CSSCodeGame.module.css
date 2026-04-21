@@ -10,9 +10,9 @@
 
 .gameContent {
   display: grid;
-  grid-template-columns: 300px 1fr 400px;
+  grid-template-columns: 280px 1fr 480px;
   gap: 1rem;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   height: calc(100vh - 200px);
 }
@@ -93,30 +93,30 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .gameContent {
-    grid-template-columns: 280px 1fr 350px;
+    grid-template-columns: 260px 1fr 420px;
   }
 }
 
 @media (max-width: 992px) {
   .gameContent {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-    /* height: auto; */
+    grid-template-rows: auto auto auto;
     gap: 1rem;
-    height: fit-content;
+    height: auto;
   }
-  
+
   .leftPanel {
     order: 1;
-    min-height: 10000px;
+    min-height: 520px;
   }
-  
+
   .rightPanel {
     order: 2;
+    min-height: 420px;
   }
-  
+
   .centerPanel {
     order: 3;
     min-height: 400px;

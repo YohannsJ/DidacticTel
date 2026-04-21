@@ -38,17 +38,17 @@ export const LEVELS = [
     validation: {
       requiredProperties: ['color', 'background-color', 'font-size', 'font-weight'],
       acceptableValues: {
-        'color': ['#0000ff', '#00f', 'blue'],
-        'background-color': ['#e3f2fd', '#e1f5fe', '#bbdefb'],
-        'font-size': ['20px', '24px'],
-        'font-weight': ['700', '600', 'bold']
+        'color': ['#0000ff'],
+        'background-color': ['#e3f2fd'],
+        'font-size': ['20px', '24px', '32px'],
+        'font-weight': ['700', '900']
       }
     },
     hints: [
-      "Arrastra la propiedad 'color' y selecciona azul",
-      "Agrega un 'background-color' azul claro",
-      "Cambia el 'font-size' a 20px o más grande",
-      "Haz el texto más grueso con 'font-weight'"
+      "Arrastra 'color' y selecciona 'Azul' (#0000ff)",
+      "Arrastra 'background-color' y selecciona 'Azul claro' (#e3f2fd)",
+      "Cambia 'font-size' a 'Grande' (20px) o mayor",
+      "Cambia 'font-weight' a 'Negrita' (700) o 'Muy negrita' (900)"
     ]
   },
 
@@ -102,15 +102,14 @@ export const LEVELS = [
     validation: {
       requiredProperties: ['margin', 'text-align'],
       acceptableValues: {
-        'margin': ['65px auto', '16px auto', 'auto'],
+        'margin': ['65px auto', '20px auto', '16px auto', 'auto'],
         'text-align': ['center']
       }
     },
     hints: [
-      "Usa 'margin: auto' para centrar horizontalmente",
-      "Usa 'text-align: center' para centrar el texto",
-      "Agrega 'padding' para espacio interior",
-      "Asegúrate de que 'display' sea 'block'"
+      "Arrastra 'margin' y usa 'Centrar 65px' (65px auto) para centrar el elemento",
+      "Arrastra 'text-align' y selecciona 'Centro' para centrar el texto",
+      "Opcional: agrega 'padding: 16px' para más espacio interior"
     ]
   },
 
@@ -170,16 +169,15 @@ export const LEVELS = [
     validation: {
       requiredProperties: ['border', 'border-radius', 'margin'],
       acceptableValues: {
-        'border': ['3px solid #333', '2px solid #000', '3px solid #000', '2px solid #333'],
+        'border': ['3px solid #333', '3px solid #000', '2px solid #000'],
         'border-radius': ['50%', '60px'],
         'margin': ['20px auto', '65px auto', '16px auto']
       }
     },
     hints: [
-      "Usa 'border-radius: 50%' para hacer un círculo perfecto",
-      "Agrega un borde grueso con 'border'",
-      "Mantén width y height iguales para un círculo perfecto",
-      "Usa 'margin: 20px auto' para centrar el elemento horizontalmente"
+      "Arrastra 'border-radius' y selecciona 'Círculo perfecto' (50%)",
+      "Arrastra 'border' y selecciona 'Grueso oscuro' (3px solid #333)",
+      "Arrastra 'margin' y selecciona 'Centrar 20px' (20px auto) para centrar"
     ]
   },
 
@@ -247,10 +245,9 @@ export const LEVELS = [
       }
     },
     hints: [
-      "Usa 'display: flex' para crear un contenedor flexible",
-      "Usa 'align-items: center' para centrar verticalmente",
-      "Usa 'justify-content: center' para centrar horizontalmente",
-      "Agrega 'text-align: center' para centrar el texto"
+      "Arrastra 'display' y selecciona 'Flex' para crear un contenedor flexible",
+      "Arrastra 'align-items' y selecciona 'Centro' para centrar verticalmente",
+      "Arrastra 'justify-content' y selecciona 'Centro' para centrar horizontalmente"
     ]
   },
 
@@ -305,17 +302,17 @@ export const LEVELS = [
       acceptableValues: {
         'border': ['1px solid #e5e7eb', '1px solid #ccc', '2px solid #e5e7eb'],
         'border-radius': ['8px', '12px', '6px'],
-        'font-size': ['20px', '18px', '24px'],
-        'font-weight': ['700', '600', 'bold'],
+        'font-size': ['20px', '24px'],
+        'font-weight': ['700', '900'],
         'text-align': ['center']
       }
     },
     hints: [
-      "Agrega borde con 'border: 1px solid #e5e7eb'",
-      "Redondea las esquinas con 'border-radius: 8px'",
-      "Aumenta el tamaño del texto con 'font-size: 20px'",
-      "Haz el texto más grueso con 'font-weight: 700'",
-      "Centra el texto con 'text-align: center'"
+      "Arrastra 'border' y selecciona 'Fino gris claro' (1px solid #e5e7eb)",
+      "Arrastra 'border-radius' y selecciona 'Redondeado' (8px)",
+      "Arrastra 'font-size' y selecciona 'Grande' (20px)",
+      "Arrastra 'font-weight' y selecciona 'Negrita' (700)",
+      "Arrastra 'text-align' y selecciona 'Centro'"
     ]
   }
 ];

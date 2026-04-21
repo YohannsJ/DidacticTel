@@ -1,38 +1,42 @@
 .elementLibrary {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   background: var(--theme-card-background);
   border-radius: 12px;
   border: 1px solid var(--theme-border);
   overflow: hidden;
-  min-height: 500px;
 }
 
 .header {
-  padding: 1rem;
+  padding: 0.6rem 0.85rem;
   border-bottom: 1px solid var(--theme-border);
   background: var(--theme-panel-background);
 }
 
 .title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.125rem;
+  margin: 0 0 0.15rem 0;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--theme-text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .helpText {
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   color: var(--theme-text-secondary);
   margin: 0;
+  line-height: 1.3;
 }
 
 .categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+  padding: 0.5rem 0.6rem;
   border-bottom: 1px solid var(--theme-border);
   background: var(--theme-surface-secondary);
 }
@@ -42,13 +46,14 @@
   border: 1px solid var(--theme-border);
   border-radius: 6px;
   color: var(--theme-text-secondary);
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.4rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.75rem;
+  transition: all 0.15s ease;
+  font-size: 0.68rem;
   white-space: nowrap;
-  flex: 1;
-  min-width: fit-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .categoryButton:hover {
@@ -65,22 +70,22 @@
 .propertiesContainer {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 0.6rem 0.6rem 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Aumenté el gap entre property groups */
+  gap: 0.6rem;
+  min-height: 0;
 }
 
 .propertyGroup {
   background: var(--theme-card-background);
   border: 1px solid var(--theme-border);
   border-radius: 8px;
-  padding: 1rem;
-  transition: all 0.2s ease;
-  min-height: 300px; /* Altura mínima reducida para evitar superposiciones */
+  padding: 0.55rem 0.65rem 0.65rem;
+  transition: border-color 0.15s ease;
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem; /* Margen extra entre grupos */
+  gap: 0.45rem;
 }
 
 .propertyGroup:hover {
@@ -89,46 +94,46 @@
 }
 
 .propertyHeader {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .propertyName {
   font-weight: 600;
   color: var(--theme-primary);
   font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   display: block;
-  margin-bottom: 0.25rem;
 }
 
 .propertyDescription {
   color: var(--theme-text-secondary);
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: 0.68rem;
+  line-height: 1.35;
   display: block;
 }
 
 .propertyValues {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1; /* Permite que esta sección crezca para llenar el espacio disponible */
-  min-height: 120px; /* Altura mínima reducida para evitar overflow */
-  overflow-y: auto; /* Permite scroll si hay muchos elementos */
-  max-height: 240px; /* Altura máxima para evitar crecimiento excesivo */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 0.35rem;
 }
 
 .propertyValue {
   background: var(--theme-panel-background);
   border: 1px solid var(--theme-border);
   border-radius: 6px;
-  padding: 0.75rem;
+  padding: 0.35rem 0.45rem;
   cursor: grab;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.4rem;
   position: relative;
+  min-width: 0;
+  min-height: 30px;
 }
 
 .propertyValue:hover {
@@ -144,51 +149,60 @@
 
 .valueName {
   color: var(--theme-text);
-  font-size: 0.875rem;
+  font-size: 0.72rem;
   font-weight: 500;
   flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .valueCode {
   color: var(--theme-success);
   font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-  font-size: 0.75rem;
+  font-size: 0.62rem;
   background: var(--theme-success-background);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
   border: 1px solid var(--theme-success-border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .valuePreview {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
   border: 1px solid var(--theme-border);
   flex-shrink: 0;
 }
 
 .propertyExample {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
   border-top: 1px solid var(--theme-border);
 }
 
 .exampleLabel {
   color: var(--theme-warning);
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 500;
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .exampleCode {
   color: var(--theme-text);
   font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   background: var(--theme-category-button);
-  padding: 0.5rem;
+  padding: 0.35rem 0.45rem;
   border-radius: 4px;
   display: block;
+  word-break: break-all;
 }
 
 .emptyCategory {
@@ -278,25 +292,20 @@
 /* Responsive */
 @media (max-width: 768px) {
   .categories {
-    padding: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.5rem;
   }
-  
+
   .categoryButton {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.65rem;
+    padding: 0.35rem 0.4rem;
   }
-  
+
   .propertiesContainer {
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
-  
-  .propertyValue {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-  .valueCode {
-    align-self: flex-start;
+
+  .propertyValues {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
 }

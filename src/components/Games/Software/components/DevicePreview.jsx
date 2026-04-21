@@ -1,74 +1,88 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import styles from './DevicePreview.module.css';
 
-export function DevicePreview({ 
-  css, 
-  html, 
-  deviceType, 
-  expectedResult, 
-  showExpected 
-}) {
-  const previewRef = useRef(null);
-  const expectedRef = useRef(null);
+function buildDoc(htmlContent, cssContent, zoom) {
+  const inv = (100 / zoom).toFixed(4);
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  const updatePreview = (ref, htmlContent, cssContent) => {
-    if (!ref.current) return;
-
-    const doc = ref.current.contentDocument;
-    if (!doc) return;
-
-    doc.open();
-    doc.write(`
-      <!DOCTYPE html>
-      <html lang="es">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Preview</title>
-        <style>
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-          
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: white;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          
-          .container {
-            width: 100%;
-            max-width: 400px;
-          }
-          
-          ${cssContent}
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          ${htmlContent}
-        </div>
-      </body>
-      </html>
-    `);
-    doc.close();
-  };
-
-  useEffect(() => {
-    updatePreview(previewRef, html, css);
-  }, [html, css]);
-
-  useEffect(() => {
-    if (showExpected && expectedResult) {
-      updatePreview(expectedRef, html, expectedResult.css || '');
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
-  }, [html, expectedResult, showExpected]);
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: white;
+      position: relative;
+    }
+
+    .scale-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: ${inv}%;
+      height: ${inv}%;
+      transform: scale(${zoom});
+      transform-origin: 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    ${cssContent}
+  </style>
+</head>
+<body>
+  <div class="scale-stage">
+    <div class="container">
+      ${htmlContent}
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+export function DevicePreview({
+  css,
+  html,
+  deviceType,
+  expectedResult,
+  showExpected
+}) {
+  const isCompact = showExpected && !!expectedResult;
+  const zoom = isCompact
+    ? (deviceType === 'web' ? 0.55 : 0.7)
+    : 1;
+
+  const currentDoc = useMemo(
+    () => buildDoc(html || '', css || '', zoom),
+    [html, css, zoom]
+  );
+
+  const expectedDoc = useMemo(
+    () => (showExpected && expectedResult
+      ? buildDoc(html || '', expectedResult.css || '', zoom)
+      : ''),
+    [html, expectedResult, showExpected, zoom]
+  );
 
   return (
     <div className={styles.devicePreview}>
@@ -83,17 +97,22 @@ export function DevicePreview({
         )}
       </div>
 
-      <div className={styles.previewContainer}>
-        {/* Preview actual */}
+      <div
+        className={`${styles.previewContainer} ${
+          showExpected && expectedResult ? styles.comparison : ''
+        } ${deviceType === 'mobile' ? styles.mobileMode : styles.webMode}`}
+      >
         <div className={styles.previewWrapper}>
           <div className={styles.previewLabel}>Tu resultado</div>
           <div className={`${styles.deviceFrame} ${styles[deviceType]}`}>
             <div className={styles.deviceScreen}>
               <iframe
-                ref={previewRef}
+                key={`current-${deviceType}-${isCompact}`}
+                srcDoc={currentDoc}
                 className={styles.previewFrame}
                 title="Vista previa actual"
                 sandbox="allow-same-origin"
+                scrolling="no"
               />
             </div>
             {deviceType === 'mobile' && (
@@ -104,17 +123,18 @@ export function DevicePreview({
           </div>
         </div>
 
-        {/* Preview esperado */}
         {showExpected && expectedResult && (
           <div className={styles.previewWrapper}>
             <div className={styles.previewLabel}>Resultado esperado</div>
             <div className={`${styles.deviceFrame} ${styles[deviceType]} ${styles.expected}`}>
               <div className={styles.deviceScreen}>
                 <iframe
-                  ref={expectedRef}
+                  key={`expected-${deviceType}-${isCompact}`}
+                  srcDoc={expectedDoc}
                   className={styles.previewFrame}
                   title="Vista previa esperada"
                   sandbox="allow-same-origin"
+                  scrolling="no"
                 />
               </div>
               {deviceType === 'mobile' && (
