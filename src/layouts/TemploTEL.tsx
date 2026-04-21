@@ -11,7 +11,6 @@ import {
 } from "../components/Pilar/PilarTelematica";
 import WebPreview from "../components/etc/WebPreview";
 import InstagramPreview from "../components/etc/InstagramPreview";
-import Footer from "../components/Footer/Footer";
 
 // Configuración de flags requeridas para desbloquear cada pilar
 const PILLAR_REQUIREMENTS = {
@@ -40,6 +39,9 @@ const PILLAR_REQUIREMENTS = {
     "D1FT3L{LAYOUT_CENTERING_PRO}"
   ]
 };
+
+// Cantidad de pilares encendidos necesarios para reconstruir el templo.
+const REQUIRED_PILLARS_TO_UNLOCK_TEMPLE = 3;
 
 export default function HomeHero() {
   const { user, isAuthenticated } = useAuth();
@@ -95,19 +97,13 @@ export default function HomeHero() {
   useEffect(() => {
     const checkUnlocked = (requirements: string[]) => {
       if (requirements.length === 0) return true; // Sin requisitos = desbloqueado
-      return requirements.every(req => userFlags.includes(req));
-    };
-
-    // Función especial para DATOS: se desbloquea con al menos 1 flag
-    const checkUnlockedDatos = (requirements: string[]) => {
-      if (requirements.length === 0) return true;
       return requirements.some(req => userFlags.includes(req));
     };
 
     const newUnlockedState = {
       TELECO: checkUnlocked(PILLAR_REQUIREMENTS.TELECO),
       REDES: checkUnlocked(PILLAR_REQUIREMENTS.REDES),
-      DATOS: checkUnlockedDatos(PILLAR_REQUIREMENTS.DATOS),
+      DATOS: checkUnlocked(PILLAR_REQUIREMENTS.DATOS),
       HARDWARE: checkUnlocked(PILLAR_REQUIREMENTS.HARDWARE),
       SOFTWARE: checkUnlocked(PILLAR_REQUIREMENTS.SOFTWARE)
     };
@@ -184,6 +180,7 @@ export default function HomeHero() {
                   labels={labels}
                   pillarPalette={DEFAULT_PILLAR_PALETTE}
                   roofPalette={DEFAULT_PILLAR_PALETTE}
+                  requiredPillarsToUnlockTemple={REQUIRED_PILLARS_TO_UNLOCK_TEMPLE}
                   gap={48}
                 />
               </div>
@@ -362,6 +359,7 @@ export default function HomeHero() {
               labels={labels}
               pillarPalette={DEFAULT_PILLAR_PALETTE}
               roofPalette={DEFAULT_PILLAR_PALETTE}
+              requiredPillarsToUnlockTemple={REQUIRED_PILLARS_TO_UNLOCK_TEMPLE}
               gap={48}
             />
             
@@ -380,10 +378,11 @@ export default function HomeHero() {
                 const isUnlocked = unlockedPillars[label as keyof typeof unlockedPillars];
                 const requirements = PILLAR_REQUIREMENTS[label as keyof typeof PILLAR_REQUIREMENTS];
                 const completedFlags = requirements.filter(req => userFlags.includes(req)).length;
-                const totalFlags = requirements.length;
+                const completedForUnlock = completedFlags > 0 ? 1 : 0;
+                const totalFlagsForUnlock = requirements.length > 0 ? 1 : 0;
 
                 // Solo mostrar progreso si hay requisitos y no está completado
-                const showProgress = totalFlags > 0 && !isUnlocked;
+                const showProgress = totalFlagsForUnlock > 0 && !isUnlocked;
 
                 return (
                   <div 
@@ -400,7 +399,7 @@ export default function HomeHero() {
                     {showProgress && (
                       <div className="text-center">
                         <span className="text-sm font-semibold" style={{ color: theme.error }}>
-                          {completedFlags}/{totalFlags} flags
+                          {completedForUnlock}/{totalFlagsForUnlock} flags
                         </span>
                       </div>
                     )}
@@ -413,7 +412,8 @@ export default function HomeHero() {
 
           {/* Leyenda */}
           <div className="mt-4 md:mt-8 text-center text-sm max-w-2xl mx-auto px-4" style={{ color: theme.textSecondary }}>
-            <p className="mb-2">Los pilares se encienden automáticamente al completar sus flags requeridas</p>
+            <p className="mb-2">Cada pilar se enciende al conseguir 1 bandera de su juego.</p>
+            <p className="mb-2">El templo se reconstruye al encender {REQUIRED_PILLARS_TO_UNLOCK_TEMPLE} pilares.</p>
             <p className="text-xs" style={{ color: theme.textMuted }}>Completa desafíos en cada juego para restaurar el Templo de Telemática</p>
           </div>
         </div>
@@ -432,9 +432,6 @@ export default function HomeHero() {
           <InstagramPreview username="telematicausm" />
         </div>
       </div>
-
-      {/* Redes sociales y web móvil - Footer */}
-    <Footer/>
 
       {/* CSS para responsive scaling */}
       <style>{`
