@@ -1176,8 +1176,8 @@ const NetworkManager = () => {
                 <button 
                   className={styles.hintButton} 
                   style={{ padding: '6px 12px', fontSize: '0.85rem', backgroundColor: '#2196F3', color: 'white' }} 
-                  onClick={() => navigate('/Software')}
-                  title="Ir al siguiente juego: Código (Software)"
+                  onClick={() => navigate('/Espectro')}
+                  title="Ir al siguiente juego: Espectro (Telecomunicaciones)"
                 >
                   Siguiente juego →
                 </button>
