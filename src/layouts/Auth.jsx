@@ -123,135 +123,137 @@ const Auth = () => {
   };
 
   return (
-    <div className={styles.authContainer}>
-      <div className={styles.authCard}>
-        {/* Botón de cambio de tema */}
-        <div className={styles.themeToggleContainer}>
-          <ThemeToggle />
-        </div>
-        
-        <div className={styles.authHeader}>
-          <h1 className={styles.authTitle}>
-            {isLoginMode ? 'Iniciar Sesión' : 'Registrarse'}
-          </h1>
-          <p className={styles.authSubtitle}>
-            {isLoginMode 
-              ? 'Bienvenido de vuelta a Didactic-Tel' 
-              : 'Únete a la comunidad Didactic-Tel'
-            }
-          </p>
-        </div>
+    <>
+      <div className={styles.authContainer}>
+        <div className={styles.authCard}>
+          {/* Botón de cambio de tema */}
+          <div className={styles.themeToggleContainer}>
+            <ThemeToggle />
+          </div>
+          
+          <div className={styles.authHeader}>
+            <h1 className={styles.authTitle}>
+              {isLoginMode ? 'Iniciar Sesión' : 'Registrarse'}
+            </h1>
+            <p className={styles.authSubtitle}>
+              {isLoginMode 
+                ? 'Bienvenido de vuelta a Didactic-Tel' 
+                : 'Únete a la comunidad Didactic-Tel'
+              }
+            </p>
+          </div>
 
-        <form className={styles.authForm} onSubmit={handleSubmit}>
-          {errors.general && (
-            <div className={styles.errorMessage}>
-              {errors.general}
-            </div>
-          )}
+          <form className={styles.authForm} onSubmit={handleSubmit}>
+            {errors.general && (
+              <div className={styles.errorMessage}>
+                {errors.general}
+              </div>
+            )}
 
-          {!isLoginMode && (
+            {!isLoginMode && (
+              <div className={styles.formGroup}>
+                <label htmlFor="name" className={styles.formLabel}>
+                  Nombre completo
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={`${styles.formInput} ${errors.name ? styles.inputError : ''}`}
+                  placeholder="Ingresa tu nombre completo"
+                />
+                {errors.name && (
+                  <span className={styles.fieldError}>{errors.name}</span>
+                )}
+              </div>
+            )}
+
             <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.formLabel}>
-                Nombre completo
+              <label htmlFor="email" className={styles.formLabel}>
+                Correo electrónico
               </label>
               <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
                 onChange={handleInputChange}
-                className={`${styles.formInput} ${errors.name ? styles.inputError : ''}`}
-                placeholder="Ingresa tu nombre completo"
+                className={`${styles.formInput} ${errors.email ? styles.inputError : ''}`}
+                placeholder="ejemplo@correo.com"
               />
-              {errors.name && (
-                <span className={styles.fieldError}>{errors.name}</span>
+              {errors.email && (
+                <span className={styles.fieldError}>{errors.email}</span>
               )}
             </div>
-          )}
 
-          <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.formLabel}>
-              Correo electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className={`${styles.formInput} ${errors.email ? styles.inputError : ''}`}
-              placeholder="ejemplo@correo.com"
-            />
-            {errors.email && (
-              <span className={styles.fieldError}>{errors.email}</span>
-            )}
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.formLabel}>
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              className={`${styles.formInput} ${errors.password ? styles.inputError : ''}`}
-              placeholder="Mínimo 6 caracteres"
-            />
-            {errors.password && (
-              <span className={styles.fieldError}>{errors.password}</span>
-            )}
-          </div>
-
-          {!isLoginMode && (
             <div className={styles.formGroup}>
-              <label htmlFor="confirmPassword" className={styles.formLabel}>
-                Confirmar contraseña
+              <label htmlFor="password" className={styles.formLabel}>
+                Contraseña
               </label>
               <input
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                id="password"
+                name="password"
+                value={formData.password}
                 onChange={handleInputChange}
-                className={`${styles.formInput} ${errors.confirmPassword ? styles.inputError : ''}`}
-                placeholder="Repite tu contraseña"
+                className={`${styles.formInput} ${errors.password ? styles.inputError : ''}`}
+                placeholder="Mínimo 6 caracteres"
               />
-              {errors.confirmPassword && (
-                <span className={styles.fieldError}>{errors.confirmPassword}</span>
+              {errors.password && (
+                <span className={styles.fieldError}>{errors.password}</span>
               )}
             </div>
-          )}
 
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <span className={styles.loadingSpinner}>⟳</span>
-            ) : (
-              isLoginMode ? 'Iniciar Sesión' : 'Registrarse'
+            {!isLoginMode && (
+              <div className={styles.formGroup}>
+                <label htmlFor="confirmPassword" className={styles.formLabel}>
+                  Confirmar contraseña
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  className={`${styles.formInput} ${errors.confirmPassword ? styles.inputError : ''}`}
+                  placeholder="Repite tu contraseña"
+                />
+                {errors.confirmPassword && (
+                  <span className={styles.fieldError}>{errors.confirmPassword}</span>
+                )}
+              </div>
             )}
-          </button>
-        </form>
 
-        <div className={styles.authFooter}>
-          <p className={styles.toggleText}>
-            {isLoginMode ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
             <button
-              type="button"
-              onClick={toggleMode}
-              className={styles.toggleButton}
+              type="submit"
+              className={styles.submitButton}
+              disabled={isLoading}
             >
-              {isLoginMode ? 'Regístrate aquí' : 'Inicia sesión aquí'}
+              {isLoading ? (
+                <span className={styles.loadingSpinner}>⟳</span>
+              ) : (
+                isLoginMode ? 'Iniciar Sesión' : 'Registrarse'
+              )}
             </button>
-          </p>
+          </form>
+
+          <div className={styles.authFooter}>
+            <p className={styles.toggleText}>
+              {isLoginMode ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
+              <button
+                type="button"
+                onClick={toggleMode}
+                className={styles.toggleButton}
+              >
+                {isLoginMode ? 'Regístrate aquí' : 'Inicia sesión aquí'}
+              </button>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
