@@ -183,7 +183,7 @@ const AppLayout = () => {
                 {user?.role === 'admin' && (
                   <>
                     <Link to="/admin" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
-                      👑 Admin
+                      👑 Config Admin
                     </Link>
                     <Link to="/admin/flags" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
                       📊 Flags Admin
@@ -223,7 +223,7 @@ const AppLayout = () => {
             </button>
             <div className={`${styles.dropdownMenu} ${styles.userDropdownMenu} ${userDropdownOpen ? styles.dropdownOpen : ''}`}>
               <Link to="/perfil" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
-                👤 Perfil
+                👤 Mi Perfil
               </Link>
               <Link to="/mis-flags" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
                 🚩 Mis Flags
@@ -231,7 +231,7 @@ const AppLayout = () => {
               {user?.role === 'admin' && (
                 <>
                   <Link to="/admin" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
-                    👑 Admin
+                    👑 Config Admin
                   </Link>
                   <Link to="/admin/flags" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
                     📊 Flags Admin
@@ -239,7 +239,7 @@ const AppLayout = () => {
                 </>
               )}
               <div className={styles.dropdownDivider}></div>
-              <div className={styles.dropdownItem} style={{ padding: '0.6rem 0.9rem' }}>
+              <div className={styles.dropdownItem} style={{ padding: '0.2rem 4rem', margin: '-0.6rem 0' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
                   {/* <span>🎨 </span> */}
                   <ThemeToggle />

@@ -1,0 +1,112 @@
+.theme-toggle-switch {
+  border: 1px solid var(--theme-border);
+  background: transparent;
+  padding: 2px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-toggle-switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--theme-primary-transparent);
+}
+
+.theme-toggle-track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70px;
+  height: 34px;
+  border-radius: 999px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  transition: background 0.25s ease;
+  overflow: hidden;
+}
+
+.theme-toggle-switch.is-light .theme-toggle-track {
+  background: linear-gradient(135deg, #f3b327 0%, #f7ca54 100%);
+}
+
+.theme-toggle-switch.is-dark .theme-toggle-track {
+  background: linear-gradient(135deg, #3365dd 0%, #4e7ef0 100%);
+}
+
+.theme-toggle-icon {
+  z-index: 1;
+  font-size: 16px;
+  line-height: 1;
+  user-select: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle-switch.is-light .theme-toggle-icon-sun {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-toggle-switch.is-light .theme-toggle-icon-moon {
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+.theme-toggle-switch.is-dark .theme-toggle-icon-sun {
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+.theme-toggle-switch.is-dark .theme-toggle-icon-moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f7f7f7;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transform: translateX(0);
+}
+
+.theme-toggle-switch.is-dark .theme-toggle-thumb {
+  transform: translateX(36px);
+}
+
+.theme-toggle-thumb.theme-toggle-thumb-to-dark {
+  animation: thumb-to-dark 0.34s ease forwards;
+}
+
+.theme-toggle-thumb.theme-toggle-thumb-to-light {
+  animation: thumb-to-light 0.34s ease forwards;
+}
+
+@keyframes thumb-to-dark {
+  0% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(39px);
+  }
+  100% {
+    transform: translateX(36px);
+  }
+}
+
+@keyframes thumb-to-light {
+  0% {
+    transform: translateX(36px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

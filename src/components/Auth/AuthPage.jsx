@@ -54,14 +54,14 @@ const AuthPage = () => {
 
   return (
     <div className={styles.authMain}>
-      <div className={styles.authContainer}>
+      <div className={styles.authContainer} style={{ marginTop: '50px' }}>
         <div className={styles.authCard}>
           {/* Botón de cambio de tema */}
-          <div className={styles.themeToggleContainer}>
+          {/* <div className={styles.themeToggleContainer}>
             <ThemeToggle />
-          </div>
+          </div> */}
           
-          <div className={styles.authCardHeader}>
+          <div className={styles.authCardHeader} >
             <h1 className={styles.authTitle}>
               {isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}
             </h1>

@@ -1,36 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext.jsx';
+import './ThemeToggle.css';
 
 /**
  * Componente ThemeToggle - Botón para cambiar entre temas
  */
 export function ThemeToggle({ className = '', style = {} }) {
   const { currentTheme, toggleTheme } = useTheme();
+  const isDark = currentTheme === 'dark';
+  const previousThemeRef = useRef(currentTheme);
+  const [thumbAnimationClass, setThumbAnimationClass] = useState('');
+
+  useEffect(() => {
+    if (previousThemeRef.current === currentTheme) return;
+
+    setThumbAnimationClass(isDark ? 'theme-toggle-thumb-to-dark' : 'theme-toggle-thumb-to-light');
+    previousThemeRef.current = currentTheme;
+
+    const timeoutId = setTimeout(() => {
+      setThumbAnimationClass('');
+    }, 360);
+
+    return () => clearTimeout(timeoutId);
+  }, [currentTheme, isDark]);
   
   return (
     <button
       onClick={toggleTheme}
-      className={`theme-toggle ${className}`}
-      style={{
-        padding: '0.5rem',
-        border: '1px solid var(--theme-border)',
-        borderRadius: '0.5rem',
-        backgroundColor: 'var(--theme-background-secondary)',
-        color: 'var(--theme-text)',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease',
-        fontSize: '1.25rem',
-        ...style
-      }}
+      className={`theme-toggle-switch ${isDark ? 'is-dark' : 'is-light'} ${className}`}
+      style={style}
+      aria-label={`Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`}
+      aria-pressed={isDark}
       title={`Cambiar a tema ${currentTheme === 'dark' ? 'claro' : 'oscuro'}`}
-      onMouseEnter={(e) => {
-        e.target.style.backgroundColor = 'var(--theme-background-tertiary)';
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.backgroundColor = 'var(--theme-background-secondary)';
-      }}
     >
-      {currentTheme === 'dark' ? '🌞' : '🌙'}
+      <span className="theme-toggle-track" aria-hidden="true">
+        <span className="theme-toggle-icon theme-toggle-icon-sun">☀</span>
+        <span className="theme-toggle-icon theme-toggle-icon-moon">☾</span>
+        <span className={`theme-toggle-thumb ${thumbAnimationClass}`} />
+      </span>
     </button>
   );
 }

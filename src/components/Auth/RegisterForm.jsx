@@ -98,7 +98,7 @@ const RegisterForm = ({ onSubmit, onSwitchToLogin, isLoading }) => {
 
   return (
     <div className={styles.formContainer}>
-      <h2 className={styles.formTitle}>Crear Cuenta</h2>
+      {/* <h2 className={styles.formTitle}>Crear Cuenta</h2> */}
       
       <form onSubmit={handleSubmit} className={styles.form}>
         {errors.general && (
