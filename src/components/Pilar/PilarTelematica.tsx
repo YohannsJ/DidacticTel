@@ -237,6 +237,8 @@ export type TemploTelematicaProps = {
   width?: number | string;
   /** separación horizontal entre pilares */
   gap?: number;
+  /** cantidad mínima de pilares desbloqueados para reconstruir el techo */
+  requiredPillarsToUnlockTemple?: number;
 };
 
 export function TemploTelematica({
@@ -246,12 +248,15 @@ export function TemploTelematica({
   roofPalette = DEFAULT_PILLAR_PALETTE,
   width = "100%",
   gap = 40,
+  requiredPillarsToUnlockTemple = 5,
 }: TemploTelematicaProps) {
-  const allOn = states.every((s) => s === 1);
+  const activePillars = states.filter((s) => s === 1).length;
+  const requiredPillars = Math.max(1, Math.min(states.length, requiredPillarsToUnlockTemple));
+  const isTempleUnlocked = activePillars >= requiredPillars;
 
   return (
     <div style={{ width, display: "grid", placeItems: "center", gap: 8 }}>
-      <TechoTelematico intacto={allOn} palette={roofPalette} />
+      <TechoTelematico intacto={isTempleUnlocked} palette={roofPalette} />
       <div style={{ display: "flex", gap, alignItems: "flex-end" }}>
         {states.map((s, i) => (
           <PilarTelematica
