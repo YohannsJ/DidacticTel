@@ -1,6 +1,7 @@
 /* Profile Tab Container */
 .profileTabContainer {
   padding: 100px 2rem 2rem;
+  margin: 50px; 
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -163,7 +164,10 @@
 .profileHeader {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
+  margin:50px 0 0;
   border-radius: 12px;
+
+  /* padding-top: 100px; */
   padding: 2rem;
   margin-bottom: 2rem;
   position: relative;
