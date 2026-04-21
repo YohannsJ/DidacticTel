@@ -775,105 +775,155 @@
   border-color: var(--theme-danger-hover, #dc2626) !important;
 }
 
+.puzzleSelectorWrapper {
+  position: relative;
+  min-width: 170px;
+}
+
 .puzzleSelect {
-  /* Fondo transparente con glassmorphism - estilo pestaña */
-  padding: 0.6rem 2.5rem 0.6rem 1.2rem;
-  background: color-mix(in srgb, var(--theme-surface) 60%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(59, 130, 246, 0.3);
-  border-bottom: none; /* Sin borde inferior - fusionado con workspace */
-  border-radius: 8px 8px 0 0;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(145deg, #0f2f57, #153f73);
+  border: 1px solid #3a8df3;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  color: #eaf4ff;
+  font-weight: 700;
   font-size: 0.9rem;
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 
-    0 -2px 8px rgba(0, 0, 0, 0.2),
+  box-shadow:
+    0 -2px 8px rgba(0, 0, 0, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6,9 12,15 18,9'></polyline></svg>");
-  background-repeat: no-repeat;
-  background-position: right 0.7rem center;
-  background-size: 1rem;
-  will-change: backdrop-filter, transform, box-shadow;
+  text-align: left;
 }
 
 .puzzleSelect:hover {
-  background: color-mix(in srgb, var(--theme-surface) 70%, transparent);
-  border-color: color-mix(in srgb, var(--theme-primary) 60%, transparent);
-  border-bottom: none;
+  background: linear-gradient(145deg, #134070, #1b4e8a);
+  border-color: #66a9ff;
   transform: translateY(-2px);
-  box-shadow: 
-    0 -4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.12) inset,
-    0 0 15px color-mix(in srgb, var(--theme-primary) 30%, transparent);
 }
 
-/* Estados específicos del selector */
-.puzzleSelect.completed {
-  background: color-mix(in srgb, var(--theme-success) 40%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-color: color-mix(in srgb, var(--theme-success) 60%, transparent);
-  border-bottom: none;
-  color: var(--theme-success-text);
-  box-shadow: 
-    0 -2px 8px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-    0 0 15px color-mix(in srgb, var(--theme-success) 30%, transparent);
-}
-
-.puzzleSelect.active {
-  background: color-mix(in srgb, var(--theme-primary) 40%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-color: color-mix(in srgb, var(--theme-primary) 70%, transparent);
-  border-bottom: none;
-  color: var(--theme-primary-text);
-  box-shadow: 
-    0 -2px 8px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 0 15px color-mix(in srgb, var(--theme-primary) 40%, transparent);
-}
-
-.puzzleSelect.completed:hover {
-  border-color: color-mix(in srgb, var(--theme-success) 80%, transparent);
-  border-bottom: none;
-  box-shadow: 
-    0 -4px 12px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 0 15px color-mix(in srgb, var(--theme-success) 40%, transparent);
-}
-
-.puzzleSelect:focus {
+.puzzleSelect:focus-visible {
   outline: none;
-  border-color: var(--theme-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--theme-primary) 35%, transparent),
+    0 -2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.puzzleSelect.completed {
+  border-color: color-mix(in srgb, var(--theme-success) 70%, #66a9ff);
+}
+
+.puzzleSelect.open {
+  border-radius: 10px 10px 0 0;
+}
+
+.puzzleSelectText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.puzzleSelectBadge {
+  padding: 0.18rem 0.42rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--theme-success) 30%, #102a4a);
+  color: color-mix(in srgb, var(--theme-success) 85%, #ffffff);
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+
+.puzzleChevron {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: transform 0.2s ease;
+}
+
+.puzzleChevronOpen {
+  transform: rotate(180deg);
+}
+
+.puzzleMenu {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  border: 1px solid #3a8df3;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(180deg, #07162a, #0a1f3b);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  z-index: 1200;
+  overflow: hidden;
+}
+
+.puzzleOption {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  border: none;
+  border-top: 1px solid rgba(141, 184, 239, 0.14);
+  background: transparent;
+  color: #e8f3ff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  text-align: left;
+}
+
+.puzzleOption:first-child {
+  border-top: none;
+}
+
+.puzzleOption:hover {
+  background: rgba(62, 136, 231, 0.26);
+  color: #ffffff;
+}
+
+.puzzleOptionActive {
+  background: linear-gradient(90deg, rgba(66, 151, 255, 0.4), rgba(66, 151, 255, 0.18));
+  color: #ffffff;
+}
+
+.puzzleOptionSolved {
+  color: #c4f2d2;
+}
+
+.puzzleOptionCheck {
+  color: #59d486;
+  font-weight: 800;
 }
 
 @media (max-width: 768px) {
-  .puzzleSelect {
-    min-width: auto;
+  .puzzleSelectorWrapper {
     width: 100%;
-    max-width: 200px;
-    font-size: 0.8rem;
-    padding: 0.4rem 2rem 0.4rem 0.6rem;
+    max-width: 220px;
+  }
+
+  .puzzleSelect {
+    font-size: 0.82rem;
+    padding: 0.52rem 0.72rem;
   }
 }
 
 @media (max-width: 480px) {
+  .puzzleSelectorWrapper {
+    max-width: 170px;
+  }
+
   .puzzleSelect {
     font-size: 0.75rem;
-    padding: 0.3rem 1.8rem 0.3rem 0.5rem;
-    max-width: 160px;
-  }
-  
-  /* Ocultar el botón modo sandbox en móvil */
-  .leftControls .controlButton {
-    display: none;
-    text-align: center;
+    padding: 0.45rem 0.62rem;
   }
 }
 

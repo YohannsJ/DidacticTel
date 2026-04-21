@@ -98,7 +98,7 @@ const WelcomePage = () => {
               <div className={styles.statCard}>
                 <div className={styles.statIcon}>👥</div>
                 <div className={styles.statValue}>{stats.activeUsers}</div>
-                <div className={styles.statLabel}>Estudiantes Activos</div>
+                <div className={styles.statLabel}>Estudiantes Activos hoy</div>
               </div>
             </div>
           ) : (

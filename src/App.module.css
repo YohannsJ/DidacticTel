@@ -1,6 +1,8 @@
 /* src/App.module.css */
 
 .appContainer {
+  --navbar-layer: 20000;
+  --navbar-menu-layer: 20001;
   display: flex;
   flex-direction: column;
   min-height: 20vh;
@@ -32,7 +34,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--navbar-layer);
   height: 60px;
   box-shadow: none;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, background 0.3s ease;
@@ -222,7 +224,7 @@
   transform: translateY(-15px) scale(0.95);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   min-width: 220px;
-  z-index: 1001;
+  z-index: var(--navbar-menu-layer);
   overflow: visible;
   max-height: 0;
   /* Crítico para backdrop-filter */
@@ -417,7 +419,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: calc(var(--navbar-layer) - 1);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -580,7 +582,7 @@
     transform: translateY(-10px);
     transition: all 0.3s ease;
     min-width: 200px;
-    z-index: 1001;
+    z-index: var(--navbar-menu-layer);
     overflow: hidden;
     max-height: none;
     margin: 0;

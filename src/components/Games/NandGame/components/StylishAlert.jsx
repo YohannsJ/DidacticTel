@@ -23,6 +23,14 @@ const StylishAlert = ({
     }
   }, [isOpen, autoClose, autoCloseDelay, onClose]);
 
+  useEffect(() => {
+    if (isOpen && flagValue) {
+      window.dispatchEvent(new CustomEvent('telix:flag-revealed', {
+        detail: { flag: flagValue }
+      }));
+    }
+  }, [isOpen, flagValue]);
+
   const copyToClipboard = async () => {
     if (flagValue) {
       try {

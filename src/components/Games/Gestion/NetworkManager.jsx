@@ -1201,48 +1201,6 @@ const NetworkManager = () => {
           
         </div>
 
-      {/* Mascota - movida fuera del header para evitar que se anime con el contenido del juego */}
-      <div className={`${styles.mascotContainer} ${showTutorial ? styles.tutorialActive : ''}`}>
-        <div className={`${styles.mascot} ${styles[mascotMood]} ${mascotHighlight ? styles.highlight : ''}`} title="Mascota" onClick={showMascotTip} role="button">
-          <div className={styles.mascotTop}>
-            <img src={telixImage} alt={mascotName} className={styles.mascotImage} />
-            <div className={styles.mascotName}>{mascotName}</div>
-          </div>
-          <div className={styles.mascotText}>
-            {/* Render the message bubble below the emoji and name - SIEMPRE con burbuja */}
-            <div>
-              <div className={styles.mascotTipInline}>
-                <div className={styles.mascotTipBody}>
-                  {mascotTip.visible ? (
-                    mascotTip.text
-                  ) : (
-                    /* Context-aware idle text: SIEMPRE mostrar algo */
-                    !showTutorial && !gameStarted && !showWelcome ? (
-                      '¡Listo para ayudar!'
-                    ) : showTutorial ? (
-                      '¡Aquí estoy!'
-                    ) : (
-                      /* during active game, show mood messages or a short idle phrase */
-                      (mascotMood !== 'idle' ? (
-                        (mascotMood === 'happy' && '¡Buen trabajo!') ||
-                        (mascotMood === 'sad' && 'Oh...') ||
-                        (mascotMood === 'cheer' && '¡Genial!') ||
-                        (mascotMood === 'thinking' && 'Mmm...') || 
-                        '¡Aquí estoy!'
-                      ) : (
-                        mascotIdleText || '¡Aquí estoy!'
-                      ))
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* The inline white mascot tip (bottom-right) handles tutorial/start/welcome messages via mascotTip state. Duplicate fixed popup bubbles removed. */}
-      </div>
-
-
 
   <div className={`${styles.mainContent} ${gameContentVisible ? styles.gameContentEntrance : ''}`}>
 

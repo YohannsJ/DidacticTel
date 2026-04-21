@@ -339,12 +339,18 @@ const EspectroGame = () => {
     if (gameState.level >= 3) return;
     
     const newLevel = gameState.level + 1;
-    
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('telix:level-up', {
+        detail: { game: 'espectro', level: newLevel }
+      }));
+    }
+
     // Limpiar espectrograma al cambiar de nivel
     if (typeof window !== 'undefined' && window.__INTRATEL_CLEAR_SPECTROGRAM) {
       window.__INTRATEL_CLEAR_SPECTROGRAM();
     }
-    
+
     let challenge;
     
     if (newLevel === 1) {

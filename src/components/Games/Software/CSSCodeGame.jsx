@@ -156,9 +156,13 @@ export default function CSSCodeGame() {
     // Auto-avanzar al siguiente nivel si no es el último
     if (!wasLastLevel && flagPopup.level !== null && flagPopup.level < LEVELS.length - 1) {
       setTimeout(() => {
-        setCurrentLevel(flagPopup.level + 1);
+        const nextLevel = flagPopup.level + 1;
+        setCurrentLevel(nextLevel);
         setCssProperties({});
         setAttempts(0);
+        window.dispatchEvent(new CustomEvent('telix:level-up', {
+          detail: { game: 'software', level: nextLevel }
+        }));
       }, 300);
     }
   }, [flagPopup.level]);

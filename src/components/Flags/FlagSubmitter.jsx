@@ -27,6 +27,10 @@ const FlagSubmitter = () => {
       const data = await response.json();
 
       if (response.ok) {
+        window.dispatchEvent(new CustomEvent('telix:flag-submitted', {
+          detail: { flag: flagValue.trim(), alreadySubmittedByGroup: data.alreadySubmittedByGroup }
+        }));
+
         if (data.alreadySubmittedByGroup) {
           setMessage({ 
             type: 'warning', 

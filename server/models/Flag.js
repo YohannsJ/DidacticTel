@@ -251,15 +251,15 @@ class Flag {
         'SELECT COUNT(*) as count FROM user_flags'
       );
 
-      // Estudiantes activos en la última hora
-      const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+      // Estudiantes activos: login desde las 00:00 de hoy
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
       const activeUsers = await database.get(
         'SELECT COUNT(*) as count FROM users WHERE last_login >= ? AND is_active = 1',
-        [oneHourAgo]
+        [startOfDay.toISOString()]
       );
 
-      // Asegurar que el mínimo sea 1
-      const activeUsersCount = Math.max(1, activeUsers.count || 0);
+      const activeUsersCount = activeUsers.count || 0;
 
       return {
         totalFlags: totalFlags.count || 0,

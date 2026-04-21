@@ -11,6 +11,7 @@ import { ThemeToggle } from './components/etc/ThemeToggle';
 import { LogoDidacticTel } from './components/etc/LogoDidacticTel';
 import FlagSubmitter from './components/Flags/FlagSubmitter';
 import Footer from './components/Footer/Footer';
+import TelixBot from './components/Telix/TelixBot';
 import styles from './App.module.css';
 // import ThemeContext from './context/ThemeContext';
 import { useTheme } from './context/ThemeContext.jsx';
@@ -281,6 +282,7 @@ const AppLayout = () => {
       </main>
       <Footer />
       {isAuthenticated && <FlagSubmitter />}
+      <TelixBot />
     </div>
   );
 };

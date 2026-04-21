@@ -90,7 +90,6 @@ export default function NandGame() {
   const [selected, setSelected] = useState(null); // {nodeId, port, kind:'out'|'in'}
   const [mousePosition, setMousePosition] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   
   // Estados para las alertas estilosas
   const [alert, setAlert] = useState({
@@ -118,11 +117,8 @@ export default function NandGame() {
   // Cerrar dropdown al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownOpen && !event.target.closest(`.${styles.exportImportGroup}`)) {
+      if (dropdownOpen && !event.target.closest(`.${styles.puzzleSelectorWrapper}`)) {
         setDropdownOpen(false);
-      }
-      if (moreDropdownOpen && !event.target.closest(`.${styles.moreGroup}`)) {
-        setMoreDropdownOpen(false);
       }
     };
 
@@ -130,7 +126,7 @@ export default function NandGame() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dropdownOpen, moreDropdownOpen, styles.exportImportGroup, styles.moreGroup]);
+  }, [dropdownOpen, styles.puzzleSelectorWrapper]);
 
   // Efecto para guardar automáticamente el estado cuando cambie
   useEffect(() => {
@@ -227,6 +223,9 @@ export default function NandGame() {
     const nextIndex = puzzleIndex + 1;
     if (nextIndex < puzzles.length) {
       resetToPuzzle(nextIndex);
+      window.dispatchEvent(new CustomEvent('telix:level-up', {
+        detail: { game: 'nandgame', level: nextIndex }
+      }));
     }
   }, [puzzleIndex, puzzles.length, resetToPuzzle]);
 
@@ -704,6 +703,13 @@ export default function NandGame() {
     setSelected(null);
   }, []);
 
+  const puzzleNames = {
+    NOT: "E1 NOT",
+    AND: "E2 AND", 
+    OR: "E3 OR",
+    XOR: "E4 XOR"
+  };
+
   return (
     <>
     <div className={styles.nandGame}>
@@ -716,26 +722,51 @@ export default function NandGame() {
           {/* Controles izquierdos - Selector de nivel y modo */}
           <div className={styles.leftTabControls}>
             {mode === 'puzzle' && (
-              <select
-                className={`${styles.puzzleSelect} ${solved[puzzles[puzzleIndex]?.key] ? styles.completed : ''} ${styles.active}`}
-                value={puzzleIndex}
-                onChange={(e) => resetToPuzzle(parseInt(e.target.value, 10))}
-              >
-                {puzzles.map((puzzle, index) => {
-                  const puzzleNames = {
-                    NOT: "E1 NOT",
-                    AND: "E2 AND", 
-                    OR: "E3 OR",
-                    XOR: "E4 XOR"
-                  };
-                  return (
-                    <option key={puzzle.key} value={index}>
-                      {puzzleNames[puzzle.key] || `Ejercicio ${index + 1} – ${puzzle.key}`}
-                      {solved[puzzle.key] ? " ✅" : ""}
-                    </option>
-                  );
-                })}
-              </select>
+              <div className={styles.puzzleSelectorWrapper}>
+                <button
+                  type="button"
+                  className={`${styles.puzzleSelect} ${solved[puzzles[puzzleIndex]?.key] ? styles.completed : ''} ${dropdownOpen ? styles.open : ''}`}
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  aria-haspopup="listbox"
+                  aria-expanded={dropdownOpen}
+                  aria-label="Seleccionar ejercicio"
+                >
+                  <span className={styles.puzzleSelectText}>
+                    {puzzleNames[puzzles[puzzleIndex]?.key] || `Ejercicio ${puzzleIndex + 1} – ${puzzles[puzzleIndex]?.key}`}
+                  </span>
+                  {solved[puzzles[puzzleIndex]?.key] && (
+                    <span className={styles.puzzleSelectBadge}>Completado</span>
+                  )}
+                  <span className={`${styles.puzzleChevron} ${dropdownOpen ? styles.puzzleChevronOpen : ''}`} aria-hidden="true">
+                    ▾
+                  </span>
+                </button>
+
+                {dropdownOpen && (
+                  <div className={styles.puzzleMenu} role="listbox" aria-label="Ejercicios disponibles">
+                    {puzzles.map((puzzle, index) => {
+                      const isActive = index === puzzleIndex;
+                      const isSolved = solved[puzzle.key];
+                      return (
+                        <button
+                          key={puzzle.key}
+                          type="button"
+                          className={`${styles.puzzleOption} ${isActive ? styles.puzzleOptionActive : ''} ${isSolved ? styles.puzzleOptionSolved : ''}`}
+                          role="option"
+                          aria-selected={isActive}
+                          onClick={() => {
+                            resetToPuzzle(index);
+                            setDropdownOpen(false);
+                          }}
+                        >
+                          <span>{puzzleNames[puzzle.key] || `Ejercicio ${index + 1} – ${puzzle.key}`}</span>
+                          {isSolved && <span className={styles.puzzleOptionCheck}>✓</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             )}
             
             {mode === 'puzzle' ? (

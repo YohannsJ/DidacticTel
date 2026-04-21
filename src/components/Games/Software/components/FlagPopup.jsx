@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './FlagPopup.module.css';
 
 const LEVEL_FLAGS = {
@@ -35,9 +35,17 @@ const LEVEL_FLAGS = {
 };
 
 export function FlagPopup({ level, isOpen, onClose }) {
-  if (!isOpen) return null;
-
   const flagData = LEVEL_FLAGS[level];
+
+  useEffect(() => {
+    if (isOpen && flagData?.flag) {
+      window.dispatchEvent(new CustomEvent('telix:flag-revealed', {
+        detail: { flag: flagData.flag }
+      }));
+    }
+  }, [isOpen, flagData?.flag]);
+
+  if (!isOpen) return null;
   
   if (!flagData) return null;
 
