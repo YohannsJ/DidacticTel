@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { apiUrl, apiHeaders } from '../../../config/index.js';
 import { useNavigate } from 'react-router-dom';
 import Spectrogram from './Spectrogram.jsx';
-import Footer from '../../Footer/Footer.jsx';
 import styles from './EspectroGame.module.css';
 
 // Componente memoizado del Spectrogram para optimización
@@ -348,6 +347,74 @@ const EspectroGame = () => {
     
     let challenge;
     
+    if (newLevel === 1) {
+      challenge = generateLevel1Challenge();
+      setGameState(prev => ({
+        ...prev,
+        level: newLevel,
+        targetFrequency: challenge.targetFrequency,
+        currentFrequency: challenge.currentFrequency,
+        completed: false,
+        isPlaying: true,
+        bandwidth: 10,
+        signalPower: 10,
+        noise: prev.noise - 2,
+        startTime: Date.now(),
+        attempts: 0,
+        selectedBand: null,
+      }));
+    } else if (newLevel === 2) {
+      challenge = generateLevel2Challenge();
+      setGameState(prev => ({
+        ...prev,
+        level: newLevel,
+        targetFrequency: challenge.frequency,
+        correctBand: challenge.correctBand,
+        selectedBand: null,
+        currentFrequency: challenge.frequency,
+        completed: false,
+        isPlaying: true,
+        bandwidth: 10,
+        signalPower: 10,
+        noise: prev.noise - 2,
+        startTime: Date.now(),
+        attempts: 0,
+      }));
+    } else if (newLevel === 3) {
+      challenge = generateLevel3Challenge();
+      setGameState(prev => ({
+        ...prev,
+        level: newLevel,
+        requiredDataRate: challenge.requiredDataRate,
+        targetFrequency: challenge.targetFrequency,
+        targetPower: challenge.targetPower,
+        distance: challenge.distance,
+        calculatedBandwidth: 0,
+        calculatedPower: 0,
+        completed: false,
+        isPlaying: true,
+        bandwidth: 25,
+        signalPower: 25,
+        noise: prev.noise - 2,
+        startTime: Date.now(),
+        attempts: 0,
+      }));
+    }
+  }, [gameState.level, generateLevel1Challenge, generateLevel2Challenge, generateLevel3Challenge]);
+
+  const startPreviousLevel = useCallback(() => {
+    // No permitir retroceder por debajo del nivel 1
+    if (gameState.level <= 1) return;
+
+    const newLevel = gameState.level - 1;
+
+    // Limpiar espectrograma al cambiar de nivel
+    if (typeof window !== 'undefined' && window.__INTRATEL_CLEAR_SPECTROGRAM) {
+      window.__INTRATEL_CLEAR_SPECTROGRAM();
+    }
+
+    let challenge;
+
     if (newLevel === 1) {
       challenge = generateLevel1Challenge();
       setGameState(prev => ({
@@ -1199,6 +1266,9 @@ const EspectroGame = () => {
               <div className={styles.controlsHeader}>
                 <h3 className={styles.controlsTitle}>🎛️ Controles Nivel {gameState.level}</h3>
               </div>
+              <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.75rem' }}>
+                💡 Tip: en perillas/deslizadores puedes usar teclado (flechas ← → y ↑ ↓) para ajustar.
+              </div>
               <div className={styles.controlsContent}>
                 <div className={styles.targetInfo}>
                   <h4 style={{marginBottom: 6}}>🎯 Desafío Nivel {gameState.level}:</h4>
@@ -1488,7 +1558,23 @@ const EspectroGame = () => {
           <div className={styles.centerPanel}>
             <div className={styles.spectrumPanel}>
               <div className={styles.spectrumHeader}>
+                <button
+                  className={styles.levelHeaderButton}
+                  onClick={startPreviousLevel}
+                  disabled={gameState.level <= 1}
+                  title={gameState.level <= 1 ? 'Ya estas en el nivel 1' : `Ir al nivel ${gameState.level - 1}`}
+                >
+                  ⬅️ Nivel anterior
+                </button>
                 <h3 className={styles.spectrumTitle}>📊 Análisis Espectral</h3>
+                <button
+                  className={styles.levelHeaderButton}
+                  onClick={startNextLevel}
+                  disabled={gameState.level >= 3}
+                  title={gameState.level >= 3 ? 'Ya estas en el nivel final' : `Ir al nivel ${gameState.level + 1}`}
+                >
+                  Nivel siguiente ➡️
+                </button>
               </div>
               <div className={styles.spectrumContent}>
                 <div className={styles.spectrogramControls}>
@@ -1803,7 +1889,7 @@ const EspectroGame = () => {
         marginTop: '20px'
       }}>
         <button 
-          onClick={() => navigate('/Redes')}
+          onClick={() => navigate('/Datos')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#2196F3',
@@ -1814,12 +1900,12 @@ const EspectroGame = () => {
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al juego anterior: Consola (Redes)"
+          title="Ir al juego anterior: Análisis (Datos)"
         >
           ← Juego anterior
         </button>
         <button 
-          onClick={() => navigate('/NandGame')}
+          onClick={() => navigate('/Software')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#4CAF50',
@@ -1830,14 +1916,12 @@ const EspectroGame = () => {
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al siguiente juego: NandGame (Hardware)"
+          title="Ir al siguiente juego: Código (Software)"
         >
           Siguiente juego →
         </button>
       </div>
       
-      {/* Footer con créditos de todos los creadores */}
-      <Footer />
     </div>
   );
 };
