@@ -287,7 +287,7 @@ const UserFlagsList = () => {
                   {/* Fila superior: icono + puntos */}
                   <div className={styles.flagTopRow}>
                     <div className={styles.flagIcon}>
-                      {isObtained ? '🏁' : '🚩'}
+                      {isObtained ? '🚩' : '🏴'}
                     </div>
                     <div className={`${styles.flagPoints} ${isObtained ? styles.obtainedPoints : styles.missingPoints}`}>
                       +{flag.points} pts

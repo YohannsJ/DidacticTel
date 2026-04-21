@@ -178,7 +178,7 @@ const AppLayout = () => {
                   👤 Perfil
                 </Link>
                 <Link to="/mis-flags" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
-                  🏁 Mis Flags
+                  🚩Mis Flags
                 </Link>
                 {user?.role === 'admin' && (
                   <>
@@ -226,7 +226,7 @@ const AppLayout = () => {
                 👤 Perfil
               </Link>
               <Link to="/mis-flags" className={styles.dropdownItem} onClick={handleUserMenuSelection}>
-                🏁 Mis Flags
+                🚩 Mis Flags
               </Link>
               {user?.role === 'admin' && (
                 <>

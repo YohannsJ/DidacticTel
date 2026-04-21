@@ -151,7 +151,7 @@ const UserFlagsList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.title}>🏁 Mis Flags</h2>
+        <h2 className={styles.title}>🚩 Mis Flags</h2>
         <button
           className={styles.refreshButton}
           onClick={refreshData}
