@@ -199,6 +199,10 @@
   padding: 1rem;
   border-bottom: 1px solid var(--theme-border);
   background: var(--theme-background-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .spectrumTitle {
@@ -206,6 +210,8 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--theme-text);
+  text-align: center;
+  flex: 1;
 }
 
 .spectrumContent {
@@ -525,6 +531,28 @@
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+}
+
+.levelHeaderButton {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(45deg, var(--theme-primary), var(--theme-primary-hover));
+  color: white;
+  white-space: nowrap;
+}
+
+.levelHeaderButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.levelHeaderButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .checkButton,
