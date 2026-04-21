@@ -9,7 +9,6 @@ import { ProgressTracker } from './components/ProgressTracker.jsx';
 import { FlagPopup } from './components/FlagPopup.jsx';
 import { generateCSS, validateLevel } from './utils/cssGenerator.js';
 import { LEVELS } from './config/levelData.js';
-import Footer from '../../Footer/Footer.jsx';
 import styles from './CSSCodeGame.module.css';
 
 const GAME_STATE_KEY = 'cssCodeGame_state';
@@ -251,7 +250,7 @@ export default function CSSCodeGame() {
         borderTop: '1px solid rgba(0,0,0,0.1)'
       }}>
         <button 
-          onClick={() => navigate('/Datos')}
+          onClick={() => navigate('/Espectro')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#2196F3',
@@ -262,7 +261,7 @@ export default function CSSCodeGame() {
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al juego anterior: Gestión de Redes"
+          title="Ir al juego anterior: Espectro (Telecomunicaciones)"
         >
           ← Juego anterior
         </button>
@@ -284,8 +283,6 @@ export default function CSSCodeGame() {
         </button>
       </div>
       
-      {/* Footer con créditos de todos los creadores */}
-      <Footer />
       
       {/* Popup de banderas */}
       <FlagPopup
