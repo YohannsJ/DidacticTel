@@ -67,7 +67,6 @@ export const LEVELS = [
       .container {
         width: 100%;
         height: 200px;
-        border: 2px dashed #ccc;
         background: #f9f9f9;
       }
       
