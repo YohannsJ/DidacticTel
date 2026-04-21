@@ -6,7 +6,6 @@ import Topology from './components/Topology.jsx';
 import ConsoleWithTabs from './components/ConsoleWithTabs.jsx';
 import { createInitialTopology } from './lib/topologyState.js';
 import { IOSProvider } from './lib/iosEngine.jsx';
-import Footer from '../../Footer/Footer.jsx';
 
 export default function Network(){
   const navigate = useNavigate();
@@ -121,7 +120,7 @@ export default function Network(){
           ← Juego anterior
         </button>
         <button 
-          onClick={() => navigate('/Espectro')}
+          onClick={() => navigate('/NandGame')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#4CAF50',
@@ -132,14 +131,12 @@ export default function Network(){
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al siguiente juego: Espectro (Teleco)"
+          title="Ir al siguiente juego: NandGame (Hardware)"
         >
           Siguiente juego →
         </button>
       </div>
       
-      {/* Footer con créditos de todos los creadores */}
-      <Footer />
       </div>
     </IOSProvider>
   );
