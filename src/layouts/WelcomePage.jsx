@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getApiUrl } from '../config';
-import Footer from '../components/Footer/Footer';
 import styles from './WelcomePage.module.css';
 
 const WelcomePage = () => {
@@ -38,6 +37,12 @@ const WelcomePage = () => {
       path: "/Datos"
     },
     {
+      title: "📡 Espectro (Telecomunicaciones)",
+      description: "Explora el espectro electromagnético y comprende los fundamentos de las comunicaciones inalámbricas.",
+      skills: ["Ondas electromagnéticas", "Modulación", "Propagación de señales"],
+      path: "/Espectro"
+    },
+    {
       title: "💻 Código (Software)",
       description: "Desarrolla habilidades de programación resolviendo desafíos de código y CSS interactivos.",
       skills: ["Programación", "Diseño web", "Algoritmos"],
@@ -49,12 +54,6 @@ const WelcomePage = () => {
       description: "Domina los protocolos de red y aprende a configurar dispositivos en un entorno de simulación realista.",
       skills: ["Protocolos TCP/IP", "Configuración de routers", "Subnetting"],
       path: "/Redes"
-    },
-    {
-      title: "📡 Espectro (Telecomunicaciones)",
-      description: "Explora el espectro electromagnético y comprende los fundamentos de las comunicaciones inalámbricas.",
-      skills: ["Ondas electromagnéticas", "Modulación", "Propagación de señales"],
-      path: "/Espectro"
     },
     {
       title: "🔧 NandGame (Hardware)",
@@ -110,7 +109,7 @@ const WelcomePage = () => {
 
         {/* Información sobre el sistema de flags */}
         <section className={styles.flagsSection}>
-          <h2 className={styles.sectionTitle}>🏁 Sistema de Flags</h2>
+          <h2 className={styles.sectionTitle}>🚩 Sistema de Flags</h2>
           <div className={styles.flagsInfo}>
             <div className={styles.infoCard}>
               <div className={styles.infoIcon}>🔍</div>
@@ -184,7 +183,6 @@ const WelcomePage = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

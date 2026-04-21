@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import Footer from '../components/Footer/Footer';
 import styles from './LandingPage.module.css';
 
 const LandingPage = () => {
@@ -16,10 +15,16 @@ const LandingPage = () => {
 
   const features = [
     {
+      title: "Pilares Telemáticos",
+      description: "Explora los fundamentos de la ingeniería civil telemática a través de contenido interactivo y práctico.",
+      icon: "📡",
+      details: ["Teoría de redes", "Protocolos", "Arquitecturas de comunicación"]
+    },
+    {
       title: "Juegos Interactivos",
       description: "Aprende conceptos complejos de telecomunicaciones a través de juegos diseñados específicamente para la carrera.",
       icon: "🎮",
-      details: ["Circuitos lógicos NAND", "Protocolos de red", "Sistemas de comunicación"]
+      details: [ "Protocolos de red", "Sistemas de comunicación", "Circuitos lógicos", "Diseño de software", "Análisis de datos"]
     },
     {
       title: "Sistema de Flags",
@@ -34,12 +39,6 @@ const LandingPage = () => {
     //   icon: "👥",
     //   details: ["Creación de grupos", "Estadísticas compartidas", "Competencias entre equipos"]
     // },
-    {
-      title: "Pilares Telemáticos",
-      description: "Explora los fundamentos de la ingeniería civil telemática a través de contenido interactivo y práctico.",
-      icon: "📡",
-      details: ["Teoría de redes", "Protocolos", "Arquitecturas de comunicación"]
-    }
   ];
 
   useEffect(() => {
@@ -132,12 +131,18 @@ const LandingPage = () => {
             </h1>
             <p className={styles.heroSubtitle}>
               Una plataforma interactiva diseñada por DifTel para ofrecer una experiencia única 
-              en el aprendizaje de <strong>Ingeniería Civil Telemática</strong>
+              en el conocimiento de tu <strong> FUTURA CARRERA</strong> 
             </p>
-            <p className={styles.heroDescription}>
-              Descubre los pilares fundamentales de la carrera a través de juegos educativos, 
-              desafíos prácticos y colaboración en equipo.
-            </p>
+              <h3 className={styles.heroTitle}>
+                <span className={styles.brandName}>
+                  
+                Ingeniería Civil </span>
+                   Telemática
+                </h3>
+              {/* <p className={styles.heroDescription}>
+              Descubre los pilares fundamentales de la carrera a través de juegos educativos y 
+              desafíos prácticos.
+            </p> */}
             <div className={styles.heroActions}>
               <button 
                 onClick={handleGetStarted}
@@ -155,7 +160,7 @@ const LandingPage = () => {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>¿Por qué elegir Didactic-Tel?</h2>
           <p className={styles.sectionSubtitle}>
-            Una experiencia de aprendizaje diseñada específicamente para estudiantes de telecomunicaciones
+            Una experiencia de aprendizaje diseñada específicamente para estudiantes de enseñanza media que quieran conocer más de la carrera y sus pilares.
           </p>
         </div>
         
@@ -199,7 +204,7 @@ const LandingPage = () => {
             <div className={styles.stepContent}>
               <h3 className={styles.stepTitle}>Regístrate</h3>
               <p className={styles.stepDescription}>
-                Crea tu cuenta individual y comienza tu aventura de aprendizaje
+                <strong>Haz click aquí</strong>, crea tu cuenta individual y comienza tu aventura de aprendizaje
               </p>
             </div>
           </div>
@@ -221,11 +226,16 @@ const LandingPage = () => {
               <p className={styles.stepDescription}>
                 Completa desafíos, obtén flags y compite en el ranking con otros estudiantes
               </p>
+              <p></p>
+              <p className={styles.stepDescription}><i>
+                *Recuerda que para obtener el puntaje, debes copiar la flag obtenida en cada desafío y pegarla en el sistema de flags para que se registre tu progreso.*
+              </i>
+                
+              </p>
             </div>
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };
