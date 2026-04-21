@@ -2,7 +2,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import NetworkManager from "../components/Games/Gestion/NetworkManager";
-import Footer from "../components/Footer/Footer";
 
 const GestionWorkshop = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const GestionWorkshop = () => {
         borderTop: '1px solid rgba(0,0,0,0.1)'
       }}>
         <button 
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/NandGame')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#2196F3',
@@ -31,12 +30,12 @@ const GestionWorkshop = () => {
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al juego anterior: Gestión de Redes"
+          title="Ir al juego anterior: NandGame (Hardware)"
         >
-          ← Main
+          ← Juego anterior
         </button>
         <button 
-          onClick={() => navigate('/software')}
+          onClick={() => navigate('/Espectro')}
           style={{
             padding: '10px 20px',
             backgroundColor: '#4CAF50',
@@ -47,14 +46,12 @@ const GestionWorkshop = () => {
             fontSize: '0.9rem',
             fontWeight: '600'
           }}
-          title="Ir al siguiente juego: Consola (Redes)"
+          title="Ir al siguiente juego: Espectro (Telecomunicaciones)"
         >
           Siguiente juego →
         </button>
       </div>
       
-      {/* Footer con créditos de todos los creadores */}
-      <Footer />
     </div>
   );
 };
