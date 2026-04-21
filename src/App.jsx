@@ -10,6 +10,7 @@ import { useAuth } from './context/AuthContext';
 import { ThemeToggle } from './components/etc/ThemeToggle';
 import { LogoDidacticTel } from './components/etc/LogoDidacticTel';
 import FlagSubmitter from './components/Flags/FlagSubmitter';
+import Footer from './components/Footer/Footer';
 import styles from './App.module.css';
 // import ThemeContext from './context/ThemeContext';
 import { useTheme } from './context/ThemeContext.jsx';
@@ -278,6 +279,7 @@ const AppLayout = () => {
       <main className={styles.content}>
         <Outlet />
       </main>
+      <Footer />
       {isAuthenticated && <FlagSubmitter />}
     </div>
   );
