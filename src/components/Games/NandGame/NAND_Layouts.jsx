@@ -9,7 +9,6 @@ import { TruthTable } from './components/TruthTable.jsx';
 import { DynamicTruthTable } from './components/DynamicTruthTable.jsx';
 import { Toolbar } from './components/Toolbar.jsx';
 import StylishAlert from './components/StylishAlert.jsx';
-import Footer from '../../Footer/Footer.jsx';
 import styles from './styles/NandGame.module.css';
 
 /**
@@ -997,7 +996,7 @@ export default function NandGame() {
       marginTop: '20px'
     }}>
       <button 
-        onClick={() => navigate('/Espectro')}
+        onClick={() => navigate('/Redes')}
         style={{
           padding: '10px 20px',
           backgroundColor: '#2196F3',
@@ -1008,12 +1007,12 @@ export default function NandGame() {
           fontSize: '0.9rem',
           fontWeight: '600'
         }}
-        title="Ir al juego anterior: Espectro (Teleco)"
+        title="Ir al juego anterior: Consola (Redes)"
       >
         ← Juego anterior
       </button>
       <button 
-        onClick={() => navigate('/templo')}
+        onClick={() => navigate('/Datos')}
         style={{
           padding: '10px 20px',
           backgroundColor: '#9C27B0',
@@ -1024,14 +1023,12 @@ export default function NandGame() {
           fontSize: '0.9rem',
           fontWeight: '600'
         }}
-        title="Ir al Templo TEL"
+        title="Ir al siguiente juego: Análisis (Datos)"
       >
-        🏛️ Ir al Templo
+        Siguiente juego →
       </button>
     </div>
       
-    {/* Footer con créditos de todos los creadores - fuera del contenedor del juego */}
-    <Footer />
   </>
   );
 }
