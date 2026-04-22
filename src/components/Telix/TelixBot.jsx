@@ -16,10 +16,10 @@ const FLAG_REMINDERS_ON_REVEAL = [
 ];
 
 const IDLE_REMINDERS = [
-  'Te noto pensativo 🤔. Si quieres, abro una pista corta — solo dime.',
+  // 'Te noto pensativo 🤔. Si quieres, abro una pista corta — solo dime.',
   'Pausa táctica detectada. A veces releer el objetivo desbloquea lo siguiente.',
   'Cuando no sepas qué hacer, prueba algo pequeño y fíjate qué cambia. Paso a paso también cuenta.',
-  '¿Necesitas empujoncito? Haz click en mí y te doy contexto del nivel.',
+  // '¿Necesitas empujoncito? Haz click en mí y te doy contexto del nivel.',
   'No hay apuro. Respira, relee el enunciado y vuelve con fuerza 💪.',
   'Todo bien por ahí? Si trabas, las preguntas frecuentes viven en mi panel.'
 ];
@@ -91,6 +91,11 @@ const LEVEL_UP_MESSAGES = {
 
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+const GUEST_SECTION = {
+  ...sections.global,
+  intro: 'Preguntas Frecuentes'
+};
+
 // stack entry: { type: 'section'|'question', node }
 const TelixBot = () => {
   const location = useLocation();
@@ -108,16 +113,16 @@ const TelixBot = () => {
   const seenFlagsRef = useRef(new Set());
   const lastGameGreetingPathRef = useRef(null);
 
-  const section = useMemo(
-    () => (useGlobal ? sections.global : getSectionForPath(location.pathname)),
-    [location.pathname, useGlobal]
-  );
+  const section = useMemo(() => {
+    if (!isAuthenticated) return GUEST_SECTION;
+    return useGlobal ? sections.global : getSectionForPath(location.pathname);
+  }, [isAuthenticated, location.pathname, useGlobal]);
 
   // Al cambiar de ruta, resetear navegación interna y volver a la sección correspondiente
   useEffect(() => {
     setStack([]);
     setUseGlobal(false);
-  }, [location.pathname]);
+  }, [location.pathname, isAuthenticated]);
 
   const showNudge = (text, type = 'info', duration = 7500) => {
     window.clearTimeout(nudgeTimerRef.current);
@@ -137,6 +142,7 @@ const TelixBot = () => {
       : location.pathname;
     const pool = GAME_START_MESSAGES[cleanPath];
 
+    if (!isAuthenticated) return;
     if (!pool || lastGameGreetingPathRef.current === cleanPath) return;
     lastGameGreetingPathRef.current = cleanPath;
 
@@ -147,7 +153,7 @@ const TelixBot = () => {
     }, 700);
 
     return () => window.clearTimeout(timer);
-  }, [location.pathname, open]);
+  }, [isAuthenticated, location.pathname, open]);
 
   useEffect(() => {
     if (!open) return;
@@ -179,6 +185,7 @@ const TelixBot = () => {
     });
 
     const interval = window.setInterval(() => {
+      if (!isAuthenticated) return;
       if (open) return;
 
       const now = Date.now();
@@ -195,7 +202,7 @@ const TelixBot = () => {
       });
       window.clearInterval(interval);
     };
-  }, [open]);
+  }, [isAuthenticated, open]);
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -240,6 +247,8 @@ const TelixBot = () => {
   }, [isAuthenticated, open]);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     const handleFlagRevealed = () => {
       showNudge(pickRandom(FLAG_REMINDERS_ON_REVEAL), 'flag', 9500);
     };
@@ -256,9 +265,11 @@ const TelixBot = () => {
       window.removeEventListener('telix:flag-revealed', handleFlagRevealed);
       window.removeEventListener('telix:level-up', handleLevelUp);
     };
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     const flagPattern = /\b(?:D1FT3L|FLAG)\{[^}\s]{4,}\}/g;
 
     const scanForVisibleFlags = () => {
@@ -285,7 +296,7 @@ const TelixBot = () => {
       window.clearTimeout(scanTimer);
       observer.disconnect();
     };
-  }, [location.pathname]);
+  }, [isAuthenticated, location.pathname]);
 
   const current = stack.length > 0 ? stack[stack.length - 1] : null;
 
@@ -375,19 +386,21 @@ const TelixBot = () => {
             <TelixMascot size={52} />
             <div className={styles.headerText}>
               <strong>Telix</strong>
-              <small>{useGlobal ? 'Preguntas generales' : 'Ayuda contextual'}</small>
+              <small>{!isAuthenticated || useGlobal ? 'Preguntas generales' : 'Ayuda contextual'}</small>
             </div>
             <button className={styles.close} onClick={() => setOpen(false)} aria-label="Cerrar">✕</button>
           </div>
 
           <div className={styles.body}>
-            {!isAuthenticated && location.pathname !== '/auth' && (
+            {!isAuthenticated && (
               <div className={styles.authNotice}>
-                <strong>¡Necesitas una cuenta!</strong>
-                <p>Para acceder a los juegos y guardar tu progreso debes registrarte o iniciar sesión.</p>
-                <Link to="/auth" className={styles.authBtn} onClick={() => setOpen(false)}>
-                  Iniciar sesión / Registrarse
-                </Link>
+                <strong>¡Hola! Soy Telix.</strong>
+                <p>Inicia sesión o regístrate para acceder a la ayuda de los juegos y guardar tu progreso.</p>
+                {location.pathname !== '/auth' && (
+                  <Link to="/auth" className={styles.authBtn} onClick={() => setOpen(false)}>
+                    Iniciar sesión / Registrarse
+                  </Link>
+                )}
               </div>
             )}
             {stack.length > 0 && (
@@ -401,12 +414,12 @@ const TelixBot = () => {
               <>
                 <div className={styles.intro}>{section.intro}</div>
                 {renderQuestionList(section.questions)}
-                {!useGlobal && (
+                {isAuthenticated && !useGlobal && (
                   <div className={styles.globalLink}>
                     <button onClick={toggleGlobal}>Ver preguntas generales</button>
                   </div>
                 )}
-                {useGlobal && (
+                {isAuthenticated && useGlobal && (
                   <div className={styles.globalLink}>
                     <button onClick={toggleGlobal}>Volver a esta sección</button>
                   </div>

@@ -61,15 +61,32 @@ const sections = {
   '/': {
     intro: 'Estás en el inicio. ¿En qué te ayudo?',
     questions: [
-      {
-        id: 'que-hacer-aqui',
-        q: '¿Qué puedo hacer aquí?',
-        answer: 'Inicia sesión o regístrate para acceder a los juegos. Cada juego te enseña un pilar de la Telemática.'
-      },
+      // {
+      //   id: 'que-hacer-aqui',
+      //   q: '¿Qué puedo hacer aquí?',
+      //   answer: 'Inicia sesión o regístrate para acceder a los juegos. Cada juego te enseña un pilar de la Telemática.'
+      // },
       {
         id: 'donde-empezar',
         q: '¿Por dónde empiezo?',
         answer: 'Si eres nuevo, recomiendo empezar por "Datos" (más guiado) y luego "Software". Redes y NandGame son más técnicos.'
+      },
+      {
+        id: 'que-es-templo',
+        q: '¿Qué es el Templo?',
+        answer: 'El Templo es un mapa visual que muestra cómo se relacionan los 5 pilares de la Telemática entre sí. Es una forma rápida de entender el panorama completo.'  
+,        children: [
+      { id: 'p-datos', q: 'Datos', answer: 'Análisis e interpretación de información para decidir mejor. Juego: Gestión de red escolar.', references: [{ label: 'Ciencia de datos', url: 'https://es.wikipedia.org/wiki/Ciencia_de_datos' }] },
+      { id: 'p-software', q: 'Software', answer: 'Cómo se construye código, en particular HTML y CSS para interfaces.', references: [{ label: 'MDN Web Docs', url: 'https://developer.mozilla.org/es/' }] },
+      { id: 'p-redes', q: 'Redes', answer: 'Cómo se comunican los dispositivos: direcciones IP, routers, switches.', references: [{ label: 'Cisco Networking Basics', url: 'https://www.netacad.com/' }] },
+      { id: 'p-teleco', q: 'Telecomunicaciones', answer: 'Transmisión de señales: espectro, frecuencias, modulación.', references: [{ label: 'Espectro electromagnético', url: 'https://es.wikipedia.org/wiki/Espectro_electromagn%C3%A9tico' }] },
+      { id: 'p-hardware', q: 'Hardware', answer: 'Lógica digital: compuertas AND/OR/NAND y cómo forman circuitos.', references: [{ label: 'Logic gates (Khan Academy)', url: 'https://www.khanacademy.org/computing/computers-and-internet' }] }
+    ]
+      },
+      {
+        id: 'que-es-telematica',
+        q: '¿Qué es la Ingeniería Civil Telemática?',
+        answer: 'La Ingeniería Telemática es una disciplina que integra las diferentes Tecnologías de la Información y Comunicación (TIC) para diseñar, implementar y gestionar sistemas de comunicación y procesamiento de datos. En la UTFSM, esta carrera te prepara para entender desde cómo viajan los datos por Internet hasta cómo se construyen las aplicaciones que usamos a diario.'
       }
     ]
   },
@@ -315,7 +332,13 @@ const sections = {
       {
         id: 'templo-que-es',
         q: '¿Qué es el Templo?',
-        answer: 'Una vista visual que muestra cómo se relacionan los 5 pilares de la Telemática entre sí.'
+        answer: ['Una vista visual que muestra cómo se relacionan los 5 pilares de la Telemática entre sí.',
+        'Cada Pilar consta de cada uno de los juegos, y el Templo muestra cómo cada juego se conecta con los demás. Es una forma rápida de entender el panorama completo y ver cómo todo encaja.'
+          , "Para desbloquear un pilar en el Templo,  debes obtener la flag de ese juego.", 
+          // Así ganas acceso a la información detallada de cada pilar y cómo se relaciona con los otros."
+        , "Una vez el templo esté completamente desbloqueado, estarás listo para ser asumir el desafio de ser un nuevo Telematico!"
+      , "¡Suerte!"  
+      ]
       }
     ]
   },
