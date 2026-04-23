@@ -145,7 +145,7 @@
 /* Divisor en el dropdown */
 .dropdownDivider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--theme-border);
   margin: 0.25rem 0;
 }
 
@@ -208,17 +208,15 @@
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
-  /* Fondo semi-transparente para glassmorphism */
-  /* background: rgba(10, 15, 20, 0.4); */
-  /* Múltiples capas de backdrop-filter para mejor efecto */
+  background: var(--theme-background-secondary);
   backdrop-filter: blur(24px) saturate(200%) contrast(120%);
   -webkit-backdrop-filter: blur(24px) saturate(200%) contrast(120%);
-  border: 1.5px solid rgba(59, 130, 246, 0.5);
+  border: 1.5px solid var(--theme-border);
   border-radius: 14px;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-    0 5px 20px rgba(59, 130, 246, 0.3);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px var(--theme-border) inset,
+    0 5px 20px rgba(59, 130, 246, 0.15);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-15px) scale(0.95);
@@ -249,7 +247,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--theme-border-secondary);
   white-space: nowrap;
   background: transparent;
   position: relative;

@@ -91,6 +91,16 @@ const LEVEL_UP_MESSAGES = {
 
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
+const variantForPath = (pathname) => {
+  const p = (pathname || '').toLowerCase();
+  if (p.startsWith('/nandgame')) return 'nand';
+  if (p.startsWith('/software')) return 'css';
+  if (p.startsWith('/datos')) return 'data';
+  if (p.startsWith('/espectro')) return 'spectrum';
+  if (p.startsWith('/redes')) return 'network';
+  return 'default';
+};
+
 const GUEST_SECTION = {
   ...sections.global,
   intro: 'Preguntas Frecuentes'
@@ -377,13 +387,13 @@ const TelixBot = () => {
         aria-label={open ? 'Cerrar ayuda de Telix' : 'Abrir ayuda de Telix'}
         title="Telix - Asistente"
       >
-        <TelixMascot size={90} curious={open} tiltDeg={18} />
+        <TelixMascot size={120} curious={open} tiltDeg={18} variant={variantForPath(location.pathname)} />
       </button>
 
       {open && (
         <div ref={panelRef} className={styles.panel} role="dialog" aria-label="Telix asistente">
           <div className={styles.header}>
-            <TelixMascot size={52} />
+            <TelixMascot size={64} variant={variantForPath(location.pathname)} />
             <div className={styles.headerText}>
               <strong>Telix</strong>
               <small>{!isAuthenticated || useGlobal ? 'Preguntas generales' : 'Ayuda contextual'}</small>

@@ -2,22 +2,40 @@
   position: fixed;
   bottom: 15px;
   left: 15px;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  border-radius: 0;
   border: none;
   padding: 0;
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  background: transparent;
+  box-shadow: none;
   cursor: pointer;
   z-index: 9998;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  overflow: hidden;
+  transition: transform 0.18s ease;
+  overflow: visible;
 }
 
 .fab:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 10px 26px rgba(59,130,246,0.45);
+  transform: translateY(-3px) scale(1.06);
+}
+
+.fab:focus,
+.fab:focus-visible,
+.fab:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.fab svg,
+.header svg {
+  filter: drop-shadow(0 0 10px rgba(148, 222, 255, 0.55)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
+}
+
+:global(body.light-mode) .fab svg,
+:global([data-theme="light"]) .fab svg,
+:global(body.light-mode) .header svg,
+:global([data-theme="light"]) .header svg {
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
 }
 
 .fab img {
@@ -334,7 +352,7 @@
     bottom: 90px;
     max-height: 75vh;
   }
-  .fab { bottom: 16px; left: 16px; width: 78px; height: 78px; }
+  .fab { bottom: 16px; left: 16px; width: 100px; height: 100px; }
   .nudge {
     left: 16px;
     bottom: 104px;

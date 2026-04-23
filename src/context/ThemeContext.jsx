@@ -152,6 +152,13 @@ export const ThemeProvider = ({ children }) => {
     // Aplicar variables CSS globales
     const theme = themes[currentTheme];
     const root = document.documentElement;
+
+    // Aplicar atributos/clases globales para que reglas CSS condicionales funcionen
+    root.setAttribute('data-theme', currentTheme);
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.classList.toggle('light-mode', currentTheme === 'light');
+      document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+    }
     
     // Variables CSS principales
     root.style.setProperty('--theme-primary', theme.primary);

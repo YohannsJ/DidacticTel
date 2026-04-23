@@ -86,7 +86,7 @@ const sections = {
       {
         id: 'que-es-telematica',
         q: '¿Qué es la Ingeniería Civil Telemática?',
-        answer: 'La Ingeniería Telemática es una disciplina que integra las diferentes Tecnologías de la Información y Comunicación (TIC) para diseñar, implementar y gestionar sistemas de comunicación y procesamiento de datos. En la UTFSM, esta carrera te prepara para entender desde cómo viajan los datos por Internet hasta cómo se construyen las aplicaciones que usamos a diario.'
+        answer: 'La Ingeniería Civil Telemática es una disciplina que integra las diferentes Tecnologías de la Información y Comunicación (TIC) para diseñar, implementar y gestionar sistemas de comunicación y procesamiento de datos. En la UTFSM, esta carrera te prepara para entender desde cómo viajan los datos por Internet hasta cómo se construyen las aplicaciones que usamos a diario.'
       }
     ]
   },

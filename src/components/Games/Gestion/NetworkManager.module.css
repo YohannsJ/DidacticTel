@@ -563,26 +563,26 @@
 }
 
 .modal {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); /* fondo oscuro con degradado */
+  background: linear-gradient(135deg, var(--theme-background-secondary) 0%, var(--theme-surface) 100%);
   padding: 24px;
   border-radius: 12px;
   max-width: 520px;
   width: 90%;
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  border: 1px solid rgba(59, 130, 246, 0.3); /* borde azul sutil */
-  z-index: 20100; /* Por encima del backdrop */
-  color: #e2e8f0; /* texto claro para contraste */
+  border: 1px solid var(--theme-border);
+  z-index: 20100;
+  color: var(--theme-text);
 }
 
 .modal h4 {
   margin: 0 0 8px 0;
-  color: #fbbf24; /* título amarillo/dorado para destacar */
+  color: var(--theme-warning);
   font-weight: 600;
 }
 
 .modal p {
   margin: 0 0 12px 0;
-  color: #e2e8f0; /* texto claro */
+  color: var(--theme-text);
   line-height: 1.6;
 }
 
@@ -851,9 +851,9 @@
 .mascotTipInline .mascotNameHeader {
   font-weight: 900;
   margin-bottom: 6px;
-  color: #f5f7fa; /* slightly darker text on the white bubble */
+  color: #0f172a;
   font-size: 0.98rem;
-  text-align: left; /* align name to the left like a chat header */
+  text-align: left;
 }
 .mascotTipInline .mascotNameHeader::after {
   content: ':';
@@ -882,12 +882,12 @@
 .mascotNameHeader {
   font-weight: 800;
   margin-bottom: 6px;
-  color: #f5f7fa;
+  color: var(--theme-text);
   text-align: left;
   font-size: 0.95rem;
 }
 .mascotTipBody {
-  color: #111;
+  color: var(--theme-text);
   font-size: 0.92rem;
 }
 
@@ -932,14 +932,13 @@
 /* Style for the mascot name next to emoji */
 .mascotName {
   font-weight: 800;
-  color: #f5f7fa;
+  color: var(--theme-text);
   font-size: 0.95rem;
 }
 
-/* Old mascot name style preserved for compatibility */
 .mascotNameOuter {
   font-weight: 800;
-  color: #f5f7fa;
+  color: var(--theme-text);
   text-align: left;
   font-size: 0.95rem;
 }
@@ -1173,11 +1172,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 15100; /* Mayor z-index para estar por encima del backdrop */
-  background: #1e293b;
+  z-index: 15100;
+  background: var(--theme-background-secondary);
   padding: 28px;
   border-radius: 12px;
-  color: #e6eef8;
+  color: var(--theme-text);
+  border: 1px solid var(--theme-border);
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
   text-align: left;
   animation: tutorialPopup 0.3s ease-out;
