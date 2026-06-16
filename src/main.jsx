@@ -29,6 +29,8 @@ import AdminPanel from './components/Admin/AdminPanel.jsx';
 import GestionWorkshop from './layouts/GestionWorkshop.jsx';
 import WelcomePage from './layouts/WelcomePage.jsx';
 import HomePage from './layouts/HomePage.jsx';
+//juego de ajedrez con agentes por refuerzo
+import AjedrezGame from './components/Games/Ajedrez/Ajedrez.jsx'
 
 const router = createBrowserRouter([
   {
@@ -133,6 +135,12 @@ const router = createBrowserRouter([
             <AdminPanel />
           </ProtectedRoute>
         ) 
+      },
+      { path: 'Ajedrez',
+        element: (
+        <ProtectedRoute>
+          <AjedrezGame />
+        </ProtectedRoute>) 
       },
       // { path: 'Templo', element: <TemploTelematica /> },
       { path: 'Templo', element: <HomeHero /> },
