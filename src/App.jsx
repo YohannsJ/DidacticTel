@@ -160,7 +160,7 @@ const AppLayout = () => {
                 📟 NandGame (Hardware)
               </Link>
               <Link to="/Ajedrez" className={styles.dropdownItem} onClick={handleGameSelection}>
-                ♟ Ajedrez RL
+                ♟ Ajedrez RL (Agentes por refuerzo)
               </Link>
             </div>
           </div>

@@ -174,7 +174,20 @@
 }
 
 /* ── Piezas ──────────────────────────────────────────────────── */
-.pieceWhite,
+.pieceW,
+.pieceWhite {
+  font-size: 44px;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+  display: block;
+  color: #fff;
+  -webkit-text-stroke: 1.5px #2a2a2a;
+  text-shadow: 0 2px 4px rgba(0,0,0,.4);
+}
+
+.pieceB,
 .pieceBlack {
   font-size: 44px;
   line-height: 1;
@@ -182,15 +195,6 @@
   z-index: 1;
   user-select: none;
   display: block;
-}
-
-.pieceWhite {
-  color: #fff;
-  -webkit-text-stroke: 1.5px #2a2a2a;
-  text-shadow: 0 2px 4px rgba(0,0,0,.4);
-}
-
-.pieceBlack {
   color: #1a1209;
   -webkit-text-stroke: 0.5px rgba(255,255,255,.15);
   text-shadow: 0 1px 3px rgba(255,255,255,.15);
@@ -355,4 +359,6 @@
   .panel    { width: 100%; max-width: 480px; }
   .levelCards { flex-direction: row; }
   .levelDesc  { display: none; }
+  .pieceW, .pieceWhite,
+  .pieceB, .pieceBlack { font-size: 32px; }
 }
